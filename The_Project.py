@@ -1,4 +1,4 @@
-import os
+$import os
 item = [
     {"name": "NameOfItem", "price": 10},
     {"name": "NameOfItem", "price": 20},
