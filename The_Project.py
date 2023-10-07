@@ -1,12 +1,12 @@
 import os
 item = [
-    {"name": "NameOfItem", "price": 10},
-    {"name": "NameOfItem", "price": 20},
-    {"name": "NameOfItem", "price": 30},
-    {"name": "NameOfItem", "price": 40},
-    {"name": "NameOfItem", "price": 50},
-    {"name": "NameOfItem", "price": 60},
-    {"name": "NameOfItem", "price": 70},
+    {"name": "NameOfItem_1", "price": 10},
+    {"name": "NameOfItem_2", "price": 20},
+    {"name": "NameOfItem_3", "price": 30},
+    {"name": "NameOfItem_4", "price": 40},
+    {"name": "NameOfItem_5", "price": 50},
+    {"name": "NameOfItem_6", "price": 60},
+    {"name": "NameOfItem_7", "price": 70},
 ]
 
 Rice = [
@@ -161,6 +161,10 @@ def shop():
             cart, total_price = custom(cart, total_price)
             continue
         
+        if select_menu == 99:
+            payment(cart, total_price)
+            continue
+        
         index = select_menu -1
         if 0 <= index < len(item):
             total_price += item[select_menu-1]["price"]
@@ -174,6 +178,7 @@ def custom(cart, total_price):
     sim_total_price = total_price
     box = {"first":"", "last":"" , "name":"","price":0}
     clear_screen()
+    exit = -1
     while True:
         clear_screen()
         print(" Custom Menu\n")
@@ -181,8 +186,12 @@ def custom(cart, total_price):
         for i, item_dict in enumerate(Rice, start=1):
             print(f"{i}. {item_dict['name']} : {item_dict['price']} baht")
             
+        print("\nType 0 for exit custom menu")
         try:
             n = int(input("\nSelect your rice : "))
+            exit = n
+            if exit == 0:
+                break
             index = n-1
             if 0 <= index < len(Rice):
                 box["first"] = Rice[index]["name"]
@@ -194,14 +203,20 @@ def custom(cart, total_price):
             continue
             
     while True:
+        if exit == 0:
+            break
         clear_screen()
         print(" Custom Menu\n")
         print("Select ...")
         for i, item_dict in enumerate(Face, start=1):
             print(f"{i}. {item_dict['name']} : {item_dict['price']} baht")
 
+        print("\nType 0 for exit custom menu")
         try:
-            n = int(input("\nSelect your ... : "))
+            n = int(input("\nSelect your face of rice : "))
+            exit = n
+            if exit == 0:
+                break
             index = n-1
             if 0 <= index < len(Face):
                 box["last"] = Face[index]["name"]
@@ -249,6 +264,40 @@ def view_cart(cart, total_price):
             continue
         
     return sim_cart, sim_total_price
+
+def payment(cart, total_price):
+    clear_screen()
+    count_item = {}
+    count_price = {}
+    total_count = 0
+    tp = 0
+    for data in cart:
+        name = data["name"]
+        price = data["price"]
+        
+        count_price[name] = price
+        
+        if name in count_item:
+            count_item[name] += 1
+        else:
+            count_item[name] = 1
+        tp += price
+        total_count += 1  
+        
+    count_list_of_item_and_price = []
+    for string, count in count_item.items():
+        count_list_of_item_and_price.append({
+            "name": string,
+            "count": count,
+            "price": count_price.get(string, 0) 
+        })
+
+    for item in count_list_of_item_and_price:
+        print(f"{item['count']}   {item['name']}   {item['price']} Baht")
+    
+    print(f"\nnet amount {total_count} item    {tp} Baht")
+    
+    n = input("\nnext order press an Enter ... ")
 
 def main():
     while True:
