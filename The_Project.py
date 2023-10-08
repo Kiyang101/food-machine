@@ -42,6 +42,25 @@ def menu():
             clear_screen()
             continue
 
+def edit():
+    while True:
+        clear_screen()
+        print(" Edit")
+        print("1.edit menu\n2.edit custom menu\n0.exit edit menu")
+        try:
+            n = int(input("\nSelect your work : "))
+            if n == 1:
+                edit_menu()
+                continue
+            if n == 2:
+                edit_custom_menu()
+                continue
+            if n == 0:
+                break
+        except ValueError:
+            clear_screen()
+            continue
+
 def edit_menu():
     while True:
         clear_screen()
@@ -61,7 +80,7 @@ def edit_menu():
             continue
         
         if n == 1:
-            add_item()
+            add_item(1)
             continue
         
         if n == 2:
@@ -75,8 +94,10 @@ def edit_menu():
         if n == 0:
             break
 
-def add_item():
-    global item
+def add_item(e):
+    global item 
+    global Rice
+    global Face
     clear_screen()
     print(" Add Item\n")
     name = input("Enter item name : ")
@@ -86,25 +107,66 @@ def add_item():
             break
         except ValueError:
             print("Error: you price must be number")
-    item.append({"name": name, "price": price})
-    
+    if e == 1:
+        item.append({"name": name, "price": price})
+    elif e == 2:
+        Rice.append({"name": name, "price": price})
+    elif e == 3:
+        Face.append({"name": name, "price": price})
+
 def remove_item():
-    global item
+    global item 
     while True:
         clear_screen()
         print(" Remove Item\n")
         for i, item_dict in enumerate(item, start=1):
             print(f" {i}. {item_dict['name']} : {item_dict['price']} baht")
-        print("\ntype '0' for exist Remove Item")
+        print("\ntype '0' for exit Remove Item")
         try:
             n = int(input("\nEnter the number of the item to remove : "))
-            index = n-1
-            if n == 0:
-                break 
-            if 0 <= index < len(item):
-                item.pop(index)
         except ValueError:
             continue
+        index = n-1
+        if n == 0:
+            break 
+        if 0 <= index < len(item):
+            item.pop(index)
+   
+def remove_rice():
+    global Rice
+    while True:
+        clear_screen()
+        print(" Remove\n")
+        for i, item in enumerate(Rice, start=1):
+            print(f" {i}. {item['name']} : {item['price']} baht")
+        print("\ntype '0' for exit Remove Rice")
+        try:
+            n = int(input("\nEnter the number of the item to remove : "))
+        except ValueError:
+            continue
+        index = n-1
+        if n == 0:
+            break 
+        if 0 <= index < len(Rice):
+            Rice.pop(index)
+
+def remove_face():
+    global Face
+    while True:
+        clear_screen()
+        print(" Remove\n")
+        for i, item in enumerate(Face, start=1):
+            print(f" {i}. {item['name']} : {item['price']} baht")
+        print("\ntype '0' for exit Remove Face")
+        try:
+            n = int(input("\nEnter the number of the item to remove : "))
+        except ValueError:
+            continue
+        index = n-1
+        if n == 0:
+            break 
+        if 0 <= index < len(Face):
+            Face.pop(index)
    
 def update_item():
     global item
@@ -127,6 +189,131 @@ def update_item():
                 except ValueError:
                     print("Error: you price must be number")
             item[index] = {"name": name, "price": price}
+            
+def update_rice():
+    global Rice
+    while True:
+        clear_screen()
+        print(" Update Rice\n")
+        for i, item in enumerate(Rice, start=1):
+            print(f"{i}. {item['name']} : {item['price']} baht")
+        print("\ntype '0' for exist Update Rice")
+        try:
+            n = int(input("\nEnter the number of the rice to update : "))
+        except ValueError:
+            continue
+        index = n-1
+        if n == 0:
+            break
+        if 0 <= index < len(Rice):
+            name = input("Enter new rice name : ")
+            while True:
+                try:
+                    price = int(input("Enter new rice price : "))
+                    break
+                except ValueError:
+                    print("Error: you price must be number")
+            Rice[index] = {"name": name, "price": price}
+            
+def update_face():
+    global Face
+    while True:
+        clear_screen()
+        print(" Update Face\n")
+        for i, item in enumerate(Face, start=1):
+            print(f"{i}. {item['name']} : {item['price']} baht")
+        print("\ntype '0' for exist Update Face")
+        n = int(input("\nEnter the number of the face to update : "))
+        index = n-1
+        if n == 0:
+            break
+        if 0 <= index < len(Face):
+            name = input("Enter new face name : ")
+            while True:
+                try:
+                    price = int(input("Enter new face price : "))
+                    break
+                except ValueError:
+                    print("Error: you price must be number")
+            Face[index] = {"name": name, "price": price}
+        
+def edit_custom_menu():
+    while True:
+        clear_screen()
+        print("Edit custom menu")
+        print("\n1. Rice\n2. Face\n0. Exit")
+        try:
+            n = int(input("\nSelect your work : "))
+        except ValueError:
+            clear_screen()
+            continue
+        if n == 1:
+            while True:
+                clear_screen()
+                print(" List of rice")
+                for i, item_dict in enumerate(Rice, start=1):
+                    print(f"{i}. {item_dict['name']} : {item_dict['price']} baht")
+                
+                print("\n Edit Menu:")
+                print(" 1. Add Item")
+                print(" 2. Remove Item")
+                print(" 3. Update Item")
+                print(" 0. Exit")
+                try:
+                    n = int(input("\nSelect your option : "))
+                except ValueError:
+                    continue
+                    
+                if n == 0:
+                    break
+                    
+                if n == 1:
+                    add_item(2)
+                    continue
+                    
+                if n == 2:
+                    remove_rice()
+                    continue
+                    
+                if n == 3:
+                    update_rice()
+                    continue
+            continue
+            
+        if n == 2:
+            while True:
+                clear_screen()
+                print(" List of face")
+                for i, item in enumerate(Face, start=1):
+                    print(f"{i}. {item['name']} : {item['price']} baht")
+                
+                print("\n Edit Menu:")
+                print(" 1. Add Item")
+                print(" 2. Remove Item")
+                print(" 3. Update Item")
+                print(" 0. Exit")
+                try:
+                    n = int(input("\nSelect your option : "))
+                except ValueError:
+                    continue
+                    
+                if n == 0:
+                    break
+                    
+                if n == 1:
+                    add_item(3)
+                    continue
+                    
+                if n == 2:
+                    remove_face()
+                    continue
+                    
+                if n == 3:
+                    update_face()
+                    continue
+            continue
+        if n == 0:
+            break
         
 def shop():
     total_price = 0
@@ -162,8 +349,8 @@ def shop():
             continue
         
         if select_menu == 99:
-            payment(cart, total_price)
-            continue
+            cart, total_price = payment(cart, total_price)
+            break
         
         index = select_menu -1
         if 0 <= index < len(item):
@@ -176,7 +363,7 @@ def shop():
 def custom(cart, total_price):
     sim_cart = cart.copy()
     sim_total_price = total_price
-    box = {"first":"", "last":"" , "name":"","price":0}
+    box = {"first":"", "last":"" , "name":"", "price":0}
     clear_screen()
     exit = -1
     while True:
@@ -292,12 +479,14 @@ def payment(cart, total_price):
             "price": count_price.get(string, 0) 
         })
 
+    print(" list of all items\n")
     for item in count_list_of_item_and_price:
         print(f"{item['count']}   {item['name']}   {item['price']} Baht")
     
-    print(f"\nnet amount {total_count} item    {tp} Baht")
+    print(f"\nNet amount {total_count} item    {tp} Baht")
     
     n = input("\nnext order press an Enter ... ")
+    return [], 0
 
 def main():
     while True:
@@ -307,7 +496,7 @@ def main():
             shop()
             continue
         if select == 2:
-            edit_menu()
+            edit()
             continue
         if select == 0:
             break
