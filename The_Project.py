@@ -1,25 +1,26 @@
 import os
 item = [
-    {"name": "NameOfItem_1", "price": 10},
-    {"name": "NameOfItem_2", "price": 20},
-    {"name": "NameOfItem_3", "price": 30},
-    {"name": "NameOfItem_4", "price": 40},
-    {"name": "NameOfItem_5", "price": 50},
+    {"name": "ไข่เจียวหมูสับ", "price": 35},
+    {"name": "ผัดกะเพราหมูสับ", "price": 40},
+    {"name": "กระเพราหมูกรอบ", "price": 45},
+    {"name": "ผัดไทยกุ้งสด", "price": 50},
+    {"name": "เย็นตาโฟ", "price": 50},
     {"name": "NameOfItem_6", "price": 60},
     {"name": "NameOfItem_7", "price": 70},
 ]
 
 Rice = [
     {"name": "ข้าวสวย", "price": 10},
-    {"name": "ข้าวกล้อง", "price": 10},
-    {"name": "ข้าวไรซ์เบอร์รี่", "price": 10},
-    {"name": "ข้าวมัน", "price": 10},
+    {"name": "ข้าวกล้อง", "price": 15},
+    {"name": "ข้าวไรซ์เบอร์รี่", "price": 20},
+    {"name": "ข้าวมัน", "price": 15},
+    {"name": "ข้าวเหนียว", "price": 10},
 ]
 
 Face = [
-    {"name":"ไก่ทอด_1","price": 10},
-    {"name":"ไก่ทอด_2","price": 10},
-    {"name":"ไก่ทอด_3","price": 10},
+    {"name":"ไก่ทอด","price": 10},
+    {"name":"ไก่ย่าง","price": 10},
+    {"name":"ไก่ทอดวิงซ์แซ่บ","price": 10},
     {"name":"ไก่ทอด_4","price": 10},
     {"name":"ไก่ทอด_5","price": 10},
 ]
@@ -486,6 +487,7 @@ def payment(cart, total_price):
     print(f"\nNet amount {total_count} item    {tp} Baht")
     
     n = input("\nnext order press an Enter ... ")
+    
     return [], 0
 
 def main():
