@@ -488,7 +488,7 @@ def payment(cart, total_price):
     
     n = input("\nnext order press an Enter ... ")
     
-    return [], 0
+    return [], 0    
 
 def main():
     while True:
