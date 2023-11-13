@@ -3,10 +3,14 @@ item = [
     {"name": "ไข่เจียวหมูสับ", "price": 35},
     {"name": "ผัดกะเพราหมูสับ", "price": 40},
     {"name": "กระเพราหมูกรอบ", "price": 45},
+    {"name": "ข้าวหมูแดง", "price": 45},
+    {"name": "ข้าวขาหมู", "price": 45},
     {"name": "ผัดไทยกุ้งสด", "price": 50},
     {"name": "เย็นตาโฟ", "price": 50},
     {"name": "กุ้งอบวุ้นเส้น", "price": 40},
     {"name": "ข้าวผัดปู", "price": 60},
+    {"name": "ข้าวแกงกะหรี่", "price": 60},
+    {"name": "ราเม็งหมูตุ๋น", "price": 250},
 ]
 
 Rice = [
@@ -15,14 +19,18 @@ Rice = [
     {"name": "ข้าวไรซ์เบอร์รี่", "price": 20},
     {"name": "ข้าวมัน", "price": 15},
     {"name": "ข้าวเหนียว", "price": 10},
+    {"name": "ข้าวต้ม", "price": 10},
 ]
 
 topping = [
     {"name": "ไก่ทอด", "price": 20},
     {"name": "ไก่ย่าง", "price": 20},
-    {"name": "ไก่ทอดวิงซ์แซ่บ", "price": 30},
+    {"name": "ไก่คาราเกะ", "price": 30},
     {"name": "ไข่เจียว", "price": 15},
-    # {"name":"Item_5","price": 10},
+    {"name":"ไข่ดาว","price": 10},
+    {"name":"ไข่ตอก","price": 15},
+    {"name":"ไข่ชะอม","price": 15},
+    {"name":"ไข่เข็ม","price": 15},
 ]
 
 
@@ -34,7 +42,7 @@ def menu():
     error = ""
     while True:
         print(" Dawning Store\n")
-        print(" 1.shop\n 2.edit menu\n 0.exit\n")
+        print(" 1.shop\n 2.edit menu\n 0.exit\n") 
         try:
             if len(error) > 0:
                 print(error)
@@ -43,7 +51,7 @@ def menu():
             clear_screen()
             return select
         except ValueError:
-            error = "\n// The input must be a number !! //\n"
+            error = "// The input must be a number !! //\n"
             clear_screen()
             continue
 
@@ -313,82 +321,91 @@ def edit_custom_menu():
             clear_screen()
             continue
         if n == 1:
-            error = ""
-            while True:
-                clear_screen()
-                print(" List of rice")
-                for i, items in enumerate(Rice, start=1):
-                    print(f"{i}. {items['name']}: {items['price']} baht")
-
-                print("\n Edit Menu:")
-                print(" 1. Add Item")
-                print(" 2. Remove Item")
-                print(" 3. Update Item")
-                print(" 0. Exit")
-                try:
-                    if len(error) > 0:
-                        print(error)
-                        error = ""
-                    n = int(input("\nSelect your option : "))
-                except ValueError:
-                    error = "\n// The input must be a number !! //"
-                    continue
-
-                if n == 0:
-                    break
-
-                if n == 1:
-                    add_item(2)
-                    continue
-
-                if n == 2:
-                    remove_rice()
-                    continue
-
-                if n == 3:
-                    update_rice()
-                    continue
+            edit_rice_menu()
             continue
 
         if n == 2:
-            error = ""
-            while True:
-                clear_screen()
-                print(" List of topping")
-                for i, item in enumerate(topping, start=1):
-                    print(f"{i}. {item['name']}: {item['price']} baht")
-
-                print("\n Edit Menu:")
-                print(" 1. Add Item")
-                print(" 2. Remove Item")
-                print(" 3. Update Item")
-                print(" 0. Exit")
-                try:
-                    if len(error) > 0:
-                        print(error)
-                        error = ""
-                    n = int(input("\nSelect your option : "))
-                except ValueError:
-                    error = "\n// The input must be a number !! //"
-                    continue
-
-                if n == 0:
-                    break
-
-                if n == 1:
-                    add_item(3)
-                    continue
-
-                if n == 2:
-                    remove_topping()
-                    continue
-
-                if n == 3:
-                    update_topping()
-                    continue
+            edit_topping_menu()
             continue
+
         if n == 0:
             break
+
+
+def edit_rice_menu():
+    error = ""
+    while True:
+        clear_screen()
+        print(" List of rice")
+        for i, items in enumerate(Rice, start=1):
+            print(f"{i}. {items['name']}: {items['price']} baht")
+
+        print("\n Edit Menu:")
+        print(" 1. Add Item")
+        print(" 2. Remove Item")
+        print(" 3. Update Item")
+        print(" 0. Exit")
+        try:
+            if len(error) > 0:
+                print(error)
+                error = ""
+            n = int(input("\nSelect your option : "))
+        except ValueError:
+            error = "\n// The input must be a number !! //"
+            continue
+
+        if n == 0:
+            break
+
+        if n == 1:
+            add_item(2)
+            continue
+
+        if n == 2:
+            remove_rice()
+            continue
+
+        if n == 3:
+            update_rice()
+            continue
+
+
+def edit_topping_menu():
+    error = ""
+    while True:
+        clear_screen()
+        print(" List of topping")
+        for i, item in enumerate(topping, start=1):
+            print(f"{i}. {item['name']}: {item['price']} baht")
+
+        print("\n Edit Menu:")
+        print(" 1. Add Item")
+        print(" 2. Remove Item")
+        print(" 3. Update Item")
+        print(" 0. Exit")
+        try:
+            if len(error) > 0:
+                print(error)
+                error = ""
+            n = int(input("\nSelect your option : "))
+        except ValueError:
+            error = "\n// The input must be a number !! //"
+            continue
+
+        if n == 0:
+            break
+
+        if n == 1:
+            add_item(3)
+            continue
+
+        if n == 2:
+            remove_topping()
+            continue
+
+        if n == 3:
+            update_topping()
+            continue
 
 
 def shop():
@@ -483,7 +500,7 @@ def custom(cart, total_price):
             break
         clear_screen()
         print(" Custom Menu\n")
-        print("Select ...")
+        print("Select your topping")
         for i, item in enumerate(topping, start=1):
             print(f"{i}. {item['name']}: {item['price']} baht")
 
@@ -527,15 +544,15 @@ def view_cart(cart, total_price):
 
             print(f"\nAll price you need to pay {sim_total_price} Baht\n")
             print("if you want to delete item in your cart")
-            print("type 'd' followed by the number of the item, such as 'd1' ")
-            print("type '0' for retuen to menu\n ")
+            print("type 'D' or 'd' followed by the number of the item, such as 'd1' ")
+            print("type '0' for return to menu\n ")
 
             if len(error) > 0:
                 print(error)
                 error = ""
             n = input("Select your work : ")
             try:
-                if n[0] == "d" and n[1:].isdigit() and int(n[1:]) > 0:
+                if n[0] == "d" or n[0] == "D" and n[1:].isdigit() and int(n[1:]) > 0:
                     index = int(n[1:]) - 1
                     sim_total_price -= sim_cart[index]['price']
                     sim_cart.pop(index)
@@ -547,7 +564,7 @@ def view_cart(cart, total_price):
                 clear_screen()
                 break
         except ValueError:
-            error = "// The input must be a number !! //\n"
+            error = "// Error: input must be such as 'd1' !! //\n"
             clear_screen()
             continue
 
@@ -583,7 +600,7 @@ def payment(cart, total_price):
 
     NameWidth = 18
     print("\n", "-"*16, "Receipt", "-"*16, "\n")
-    print(f"{"จำนวน": <8}{"สินค้า": <20}{"ราคา": >10}\n")
+    print(f"{"Amount": <8}{"Goods": <20}{"Price": >10}\n")
     for item in count_list_of_item_and_price:
         space = NameWidth - len(item['name'])
         if len(item['name']) > NameWidth:
